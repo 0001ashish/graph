@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graph Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/vis-network/dist/vis-network.min.js"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <style>
+        #graphVisualization { /* Style for the graph container */
+            width: 600px;
+            height: 400px;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" id="numNodes" placeholder="Number of Nodes">
+    <button onclick="generateGraph()">Generate Graph</button>
+    <div id="graphVisualization"></div> 
+</body>
+</html>
