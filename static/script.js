@@ -10,7 +10,34 @@ function generateGraph() {
             const edges = createEdges(matrix);
 
             const data = { nodes: nodes, edges: edges };
-            const options = {}; 
+
+            const options = {
+                layout: {
+                    hierarchical: {
+                        direction: "LR", 
+                        sortMethod: "directed" 
+                    }
+                },
+                physics: {
+                    enabled: true, 
+                    barnesHut: {
+                        springLength: 200, 
+                        damping: 0.09
+                    }
+                },
+                nodes: {
+                    shape: 'box',
+                    size: 30,
+                    font: { color: '#333' } 
+                },
+                edges: {
+                    color: 'lightgray',
+                    smooth: { 
+                        enabled: true, 
+                        type: "curvedCCW" 
+                    }
+                }
+            };
 
             const network = new vis.Network(container, data, options); 
         })
@@ -27,12 +54,17 @@ function createNodes(matrix) {
 
 function createEdges(matrix) {
     const edges = [];
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[i].length; j++) {
+    row_index = 0
+    for (let i = 0; i<=row_index; i++) {
+        if(row_index>=matrix.length){
+            break
+        }
+        for (let j = 0; j <=i; j++) {
             if (matrix[i][j] === 1) {
                 edges.push({ from: i, to: j });
             }
         }
+        row_index++
     }
     return new vis.DataSet(edges);
 }
